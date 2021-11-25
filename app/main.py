@@ -60,16 +60,16 @@ class Ranker(BaseModel):
 # Stringify the list[object]
 @app.post("/rankers")
 async def get_stat(ranker: Ranker):
-    url = "https://api.nexon.co.kr/fifaonline4/v1.0/rankers/status"
+    # return json.dumps([{"id": p.id, "po": p.po} for p in ranker.players])
+    url = f"https://api.nexon.co.kr/fifaonline4/v1.0/rankers/status?matchtype={ranker.matchtype}&players=["
+    for p in ranker.players:
+        url += "{\"id\":" + str(p.id) + ", \"po\":" + str(p.po) + "}"
+    url += "]"
     # param = {"matchtype": ranker.matchtype, "players": }
+    print(url)
     async with httpx.AsyncClient() as client:
-        print(ranker.matchtype)
-        print(ranker.players)
-        res = await client.get(url, 
-                        params={"matchtype": ranker.matchtype, "players": json.dumps([{"id": p.id, "po": p.po} for p in ranker.players])},
-                        headers={'Authorization' : API_KEY})
-        print(res.request.url)
-        print(res.json())
+        res = await client.get(url, headers={'Authorization' : API_KEY})
+    print(res.request.url)
     return res.json()
     # results = body
     # return results
