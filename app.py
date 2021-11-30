@@ -10,7 +10,8 @@ from PIL import Image
 from io import BytesIO
 load_dotenv(verbose=True)
 
-API_KEY = os.getenv('API_KEY')
+# API_KEY = os.getenv('API_KEY')
+API_KEY = st.secrets["API_KEY"]
 BASE_URL = "https://static.api.nexon.co.kr/fifaonline4/latest/"
 
 class Player(BaseModel):
