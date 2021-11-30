@@ -1,4 +1,5 @@
 from enum import auto
+from numpy import flatiter
 import streamlit as st
 import httpx, json, os
 import pandas as pd
@@ -35,21 +36,35 @@ async def get_stat(player: Player):
                     headers={'Authorization' : API_KEY})
     return res
 
-async def search(matchtype_idx: int, pos_idx: int, athlete_idx: int):
+def translate(stat: dict):
+    st.write('평균 슛 수: ', stat["shoot"])
+    st.write('평균 유효 슛 수:', stat["effectiveShoot"])
+    st.write('평균 어시스트 수: ',stat["assist"])
+    st.write('평균 득점 수: ', stat["goal"])
+    st.write('평균 드리블 거리(야드): ',stat["dribble"])
+    st.write('평균 드리블 시도 수: ', stat["dribbleTry"])
+    st.write('평균 드리블 성공 수: ', stat["dribbleSuccess"])
+    st.write('평균 패스 시도 수: ', stat["passTry"])
+    st.write('평균 패스 성공 수: ', stat["passSuccess"])
+    st.write('평균 블락 성공 수: ', stat["block"])
+    st.write('평균 태클 성공 수: ', stat["tackle"])
+    st.write('해당 포지션으로 경기 참여한 횟수: ', stat["matchCount"])
+
+async def search(player_name: str, matchtype_idx: int, pos_idx: int, athlete_idx: int):
     player = Player(matchtype=matchtype_idx, id=athlete_idx, po=pos_idx)
     stat, img = await asyncio.gather(get_stat(player), get_actionshot(athlete_idx))
     col1, col2 = st.columns(2)
     with col1:
-        st.image(img, width=180, use_column_width=auto)
+        st.image(img, width=180, use_column_width=auto, caption=player_name)
     with col2:
         try:
             assert stat.status_code == 200
             status = stat.json()[0]['status']
-            st.json(status)
-        except:
+            translate(status)
+        except Exception as e:
             st.write('기록이 없습니다.')
             st.write('선수와 포지션이 매치되는지 확인해보세요.')
-            st.write('만약 그래도 이상이 없다면 매치타입을 변경해보세요.')
+            st.write('그래도 기록이 없다고 뜨면 매치타입을 변경해보세요.')
 
 async def main():
     st.set_page_config(
@@ -86,7 +101,7 @@ async def main():
     athlete_id = athlete_df.iloc[athlete_idx, 0]
     # To prevent printing 'None', get return value from couroutine
     if st.button('Search'):
-        r = await search(matchtype_id, pos_id, athlete_id)
+        r = await search(athlete_df.iloc[athlete_idx, 1],matchtype_id, pos_id, athlete_id)
 
 if __name__=="__main__":
     asyncio.run(main())
