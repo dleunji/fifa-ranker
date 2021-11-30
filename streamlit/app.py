@@ -49,9 +49,14 @@ async def search(matchtype_idx: int, pos_idx: int, athlete_idx: int):
         except:
             st.write('기록이 없습니다.')
             st.write('선수와 포지션이 매치되는지 확인해보세요.')
-            st.write('만약 그래도 이상이 없다면 매치타입을 변경해보세요')
+            st.write('만약 그래도 이상이 없다면 매치타입을 변경해보세요.')
 
 async def main():
+    st.set_page_config(
+        page_title='FIFA Online4 스탯 분배 가이드',
+        page_icon = '⚽',
+        layout='wide'
+    )
     st.title('⚽ FIFA Online4 스탯 분배 가이드')
     st.markdown('FIFA 초심자들은 어떻게 스탯을 분배해야 선수의 재량을 끌어낼 수 있는지 알기 어렵습니다.')
     st.markdown('초심자의 플레이에 도움이 되고자 **TOP 10,000 랭커 유저가 사용한 선수의 평균 스탯 기록**을 제공합니다.')
@@ -79,9 +84,10 @@ async def main():
     athlete_df = pd.DataFrame(athlete)
     athlete_idx = st.selectbox('3. 선수를 검색하세요.',range(len(athlete_df)),format_func= lambda x : athlete_df.iloc[x, 1])
     athlete_id = athlete_df.iloc[athlete_idx, 0]
-
+    # To prevent printing 'None', get return value from couroutine
     if st.button('Search'):
-        await search(matchtype_id, pos_id, athlete_id)
+        r = await search(matchtype_id, pos_id, athlete_id)
 
-asyncio.run(main())
+if __name__=="__main__":
+    asyncio.run(main())
 
