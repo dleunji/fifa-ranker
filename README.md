@@ -1,19 +1,15 @@
-<h1 align="center"> ⚽ FIFA Online4 스탯 활용 가이드</h1>
-<p align="center">
-    FIFA 초심자가 참고하면 좋은 TOP 10,000 랭커 기록
-</p>
+# ⚽ FIFA Online4 스탯 활용 가이드
 <p align="center">
     <a href="https://share.streamlit.io/dleunji/fifa-ranker/app.py">
         <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Open in Streamlit" />
     </a>    
 </p>
 
-![prototype](https://user-images.githubusercontent.com/46207836/144355863-04ceaa0c-791a-41ae-8e9b-ac9bf7008cd1.PNG)
-
-
-[Nexon Open API](https://developers.nexon.com/fifaonline4/api/11/22)를 사용해 FIFA 초심자들이 랭커의 스탯 기록을 참고해 플레이를 즐길 수 있도록 합니다.
+[Nexon Open API](https://developers.nexon.com/fifaonline4/api/11/22)를 사용해 FIFA 초심자들이 TOP 10,000 랭커의 스탯 기록을 참고해 플레이를 즐길 수 있도록 합니다.
 
 Streamlit으로 프로토타입을 제작한 후 [Streamlit Cloud](https://streamlit.io/cloud)로 배포하였습니다.
+
+![prototype](https://user-images.githubusercontent.com/46207836/144355863-04ceaa0c-791a-41ae-8e9b-ac9bf7008cd1.PNG)
 
 ## Getting Started
 ```shell
