@@ -88,16 +88,16 @@ async def main():
     athlete = athlete.json()
 
     matchtype_df = pd.DataFrame(matchtype)
-    matchtype_idx = st.selectbox('1. 매치를 선택하세요.', range(len(matchtype_df)), format_func=lambda x: matchtype_df.iloc[x,1])
-    matchtype_id = matchtype_df.iloc[matchtype_idx, 0]
+    matchtype_idx = st.selectbox('1. 매치를 선택하세요.', range(len(matchtype_df)), format_func=lambda x: matchtype_df.at[x,'desc'])
+    matchtype_id = matchtype_df.at[matchtype_idx, 'matchtype']
 
     pos_df = pd.DataFrame(pos)
-    pos_idx = st.selectbox('2. 포지션을 선택하세요.', range(len(pos_df)), format_func= lambda x : pos_df.iloc[x, 1])
-    pos_id = pos_df.iloc[pos_idx, 0]
+    pos_idx = st.selectbox('2. 포지션을 선택하세요.', range(len(pos_df)), format_func= lambda x : pos_df.at[x, 'desc'])
+    pos_id = pos_df.at[pos_idx, 'spposition']
 
     athlete_df = pd.DataFrame(athlete)
-    athlete_idx = st.selectbox('3. 선수를 검색하세요.',range(len(athlete_df)),format_func= lambda x : athlete_df.iloc[x, 1])
-    athlete_id = athlete_df.iloc[athlete_idx, 0]
+    athlete_idx = st.selectbox('3. 선수를 검색하세요.',range(len(athlete_df)),format_func= lambda x : athlete_df.at[x, 'name'])
+    athlete_id = athlete_df.at[athlete_idx, 'id']
 
     # To prevent printing 'None', pass the value to r
     if st.button('Search'):
