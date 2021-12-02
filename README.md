@@ -17,6 +17,11 @@ $ git clone https://github.com/dleunji/fifa-ranker .
 $ pip install -r requirements.txt
 ```
 
+## Run
+```python
+$ streamlit run app.py
+```
+
 ### API Key Issue
 환경변수인 API KEY를 `.steamlit/secrets.toml`에 저장하여 사용하나 보안 상의 문제로 Repository 에 업로드하지 않았습니다. TOML의 형식에 맞게 `.steamlit/secrets.toml`에 `API_KEY="<your secret key>"`를 입력하세요.
 
