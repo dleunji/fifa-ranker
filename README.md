@@ -1,9 +1,5 @@
 # ⚽ FIFA Online4 스탯 활용 가이드
-<p align="center">
-    <a href="https://share.streamlit.io/dleunji/fifa-ranker/app.py">
-        <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Open in Streamlit" />
-    </a>    
-</p>
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dleunji/fifa-ranker/app.py)
 
 [Nexon Open API](https://developers.nexon.com/fifaonline4/api/11/22)를 사용해 FIFA 초심자들이 TOP 10,000 랭커의 스탯 기록을 참고해 플레이를 즐길 수 있도록 합니다.
 
